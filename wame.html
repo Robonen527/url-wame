@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קישור להודעת וואצאפ</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 300px;
+        }
+        .input-group span {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 0;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        p#greeting {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 500px;
+            word-wrap: break-word;
+        }
+        #copyButton {
+            display: none;
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #copyButton:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+    <script>
+        function sayHello() {
+            var phoneNumber = document.getElementById("phoneNumber").value;
+            var text = document.getElementById("text").value;
+            var newText = text.replace(/ /g, "+");
+            var link = "https://wa.me/9725" + phoneNumber + "?text=" + newText;
+            document.getElementById("greeting").innerHTML = link;
+            document.getElementById("copyButton").style.display = "inline-block"; // הצגת כפתור ההעתקה
+        }
+
+        function copyLink() {
+            var link = document.getElementById("greeting").innerText;
+            navigator.clipboard.writeText(link).then(function() {
+                alert("הקישור הועתק בהצלחה!");
+            }, function() {
+                alert("התרחשה שגיאה בהעתקת הקישור.");
+            });
+        }
+
+        // הפעלת הפונקציה בלחיצת אנטר
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sayHello();
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <h1>יצירת קישור להודעת וואצאפ</h1>
+    
+    <div>
+        <h3>הכנס מספר:</h3>
+        <div class="input-group">
+            <input type="number" id="phoneNumber" placeholder="הכנס מספר טלפון">
+            <span>05</span>
+        </div>
+    </div>
+    
+    <div>
+        <h3>הכנס הודעה:</h3>
+        <input type="text" id="text" placeholder="הכנס את ההודעה שלך כאן">
+    </div>
+    
+    <button onclick="sayHello()">צור קישור</button>
+    
+    <!-- אלמנט שבו יוצג הקישור שנוצר -->
+    <p id="greeting"></p>
+    
+    <!-- כפתור להעתקת הקישור שיופיע רק לאחר יצירתו -->
+    <button id="copyButton" onclick="copyLink()">העתק קישור</button>
+
+</body>
+</html>
