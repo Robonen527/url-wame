@@ -103,8 +103,11 @@
         function updatePhoneNumberField() {
             var radioButtonValue = document.querySelector('input[name="phoneOption"]:checked').value;
             var phoneNumberField = document.getElementById("phoneNumber");
-            if (radioButtonValue === 'eilam') {
-                phoneNumberField.value = '86299153'; // הזנת הספרה 5 אוטומטית
+            if (radioButtonValue === 'eilon') {
+                phoneNumberField.value = '86299153';
+                phoneNumberField.disabled = true; // נטרול השדה
+            } else if (radioButtonValue === 'yuval') {
+                phoneNumberField.value = '08558332';
                 phoneNumberField.disabled = true; // נטרול השדה
             } else {
                 phoneNumberField.value = ''; // ריקון השדה
@@ -128,8 +131,10 @@
     <div>
         <input type="radio" id="customNumber" name="phoneOption" value="custom" onchange="updatePhoneNumberField()" checked>
         <label for="customNumber">הכנס מספר טלפון ידני</label><br>
-        <input type="radio" id="eilam" name="phoneOption" value="eilam" onchange="updatePhoneNumberField()">
-        <label for="eilam">אילון</label>
+        <input type="radio" id="eilon" name="phoneOption" value="eilon" onchange="updatePhoneNumberField()">
+        <label for="eilon">אילון גולדברג</label>
+        <input type="radio" id="eilon" name="phoneOption" value="yuval" onchange="updatePhoneNumberField()">
+        <label for="yuval">יובל וידיסלבסקי</label>
     </div>
 
     <!-- שדה להזנת המספר -->
