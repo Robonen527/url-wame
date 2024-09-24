@@ -99,6 +99,19 @@
             });
         }
 
+        // שינוי מצב שדה המספר בהתאם לבחירת המשתמש
+        function updatePhoneNumberField() {
+            var radioButtonValue = document.querySelector('input[name="phoneOption"]:checked').value;
+            var phoneNumberField = document.getElementById("phoneNumber");
+            if (radioButtonValue === 'eilam') {
+                phoneNumberField.value = '86299153'; // הזנת הספרה 5 אוטומטית
+                phoneNumberField.disabled = true; // נטרול השדה
+            } else {
+                phoneNumberField.value = ''; // ריקון השדה
+                phoneNumberField.disabled = false; // הפעלת השדה מחדש
+            }
+        }
+
         // הפעלת הפונקציה בלחיצת אנטר
         document.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
@@ -111,19 +124,27 @@
 
     <h1>יצירת קישור להודעת וואצאפ</h1>
     
+    <!-- כפתורי רדיו לבחירת סוג המספר -->
     <div>
-        <h3>הכנס מספר:</h3>
-        <div class="input-group">
-            <input type="number" id="phoneNumber" placeholder="הכנס מספר טלפון">
-            <span>05</span>
-        </div>
+        <input type="radio" id="customNumber" name="phoneOption" value="custom" onchange="updatePhoneNumberField()" checked>
+        <label for="customNumber">הכנס מספר טלפון ידני</label><br>
+        <input type="radio" id="eilam" name="phoneOption" value="eilam" onchange="updatePhoneNumberField()">
+        <label for="eilam">אילון</label>
+    </div>
+
+    <!-- שדה להזנת המספר -->
+    <div class="input-group">
+        <input type="number" id="phoneNumber" placeholder="הכנס מספר טלפון">
+        <span>05</span>
     </div>
     
+    <!-- שדה להזנת ההודעה -->
     <div>
         <h3>הכנס הודעה:</h3>
         <input type="text" id="text" placeholder="הכנס את ההודעה שלך כאן">
     </div>
     
+    <!-- כפתור יצירת הקישור -->
     <button onclick="sayHello()">צור קישור</button>
     
     <!-- אלמנט שבו יוצג הקישור שנוצר -->
